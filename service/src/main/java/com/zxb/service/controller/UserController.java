@@ -1,0 +1,34 @@
+package com.zxb.service.controller;
+
+import com.zxb.api.IUserService;
+import com.zxb.domain.User;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * 用mybatis中的xml来调用数据库
+ * @author zxb
+ * @create 2020/6/15
+ * @since 1.0.0
+ */
+@RestController
+@RequestMapping("/api")
+public class UserController {
+
+    @Resource
+    private IUserService userService;
+
+    @RequestMapping(value = "/queryUserList",name = "查询所有对象",method={RequestMethod.POST,RequestMethod.GET})
+    public List<User> queryUserList(){
+        return userService.queryUserList();
+    }
+
+    @RequestMapping(value = "/queryByUserId",name = "根据id获取一个对象",method = RequestMethod.GET)
+    public User queryByUserId(Long id){
+        return userService.queryUserById(id);
+    }
+
+}
