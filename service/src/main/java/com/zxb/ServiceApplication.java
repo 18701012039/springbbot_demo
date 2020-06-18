@@ -1,5 +1,6 @@
-package com.zxb.service;
+package com.zxb;
 
+import com.zxb.service.aop.EnableGlobalDispose;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @ComponentScan(basePackageClasses = {ServiceApplication.class})
 //扫描mapper
 @MapperScan(value = {"com.zxb.service.mapper"})
+@EnableGlobalDispose
 public class ServiceApplication implements CommandLineRunner, WebMvcConfigurer {
 
 	public static void main(String[] args) {

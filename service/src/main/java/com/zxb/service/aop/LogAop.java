@@ -33,7 +33,7 @@ public class LogAop {
     public void pointcut(){}
 
     @Around("pointcut()")
-    public void doLog(ProceedingJoinPoint proceedingJoinPoint){
+    public Object doLog(ProceedingJoinPoint proceedingJoinPoint){
         Signature signature = proceedingJoinPoint.getSignature();
         //方法名
         String methodName = signature.getName();
@@ -43,8 +43,9 @@ public class LogAop {
         long startTime=System.currentTimeMillis();
         log.info("开始执行时间{}",simpleDateFormat.format(new Date()));
         JSONObject object=new JSONObject();
+        Object proceed =null;
         try {
-            Object proceed = proceedingJoinPoint.proceed();
+            proceed=proceedingJoinPoint.proceed();
             if(proceed instanceof java.util.List){
                 List<?> list=(List<?>)proceed;
                 if (!CollectionUtils.isEmpty(list)) {
@@ -60,5 +61,6 @@ public class LogAop {
         log.info("执行结束时间{}",simpleDateFormat.format(new Date()));
         long endTime=System.currentTimeMillis();
         log.info("执行时间是{}秒",endTime-startTime);
+        return proceed;
     }
 }
