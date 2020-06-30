@@ -19,5 +19,20 @@ public class GlobalDefaultProperties {
      */
     private List<String> adviceFilterClass = new ArrayList<>();
 
+    public List<String> getAdviceFilterPackage() {
+        return adviceFilterPackage;
+    }
+
+    public void setAdviceFilterPackage(List<String> adviceFilterPackage) {
+        this.adviceFilterPackage = adviceFilterPackage;
+    }
+
+    public List<String> getAdviceFilterClass() {
+        return adviceFilterClass;
+    }
+
+    public void setAdviceFilterClass(List<String> adviceFilterClass) {
+        this.adviceFilterClass = adviceFilterClass;
+    }
 
 }
