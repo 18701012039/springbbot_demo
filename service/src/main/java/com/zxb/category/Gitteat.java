@@ -10,4 +10,6 @@ public class Gitteat {
 
     private Date createTime;
 
+    private String name;
+
 }
