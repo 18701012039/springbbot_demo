@@ -1,15 +1,13 @@
-package com.zxb.category;/**
- * @author zxb
- * @date 2018/10/19
- */
+package com.zxb.category;
 
-/**
- * 〈一句话功能简述〉<br> 
- * 〈〉
- *
- * @author admin
- * @create 2020/6/30
- * @since 1.0.0
- */
+
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
 public class Gitteat {
+
+    private Date createTime;
+
 }
