@@ -2,10 +2,12 @@ package com.zxb.service.controller;
 
 import com.zxb.api.IUserService;
 import com.zxb.domain.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class UserController {
 
     @Resource
@@ -30,5 +33,16 @@ public class UserController {
     public User queryByUserId(Long id){
         return userService.queryUserById(id);
     }
+
+    @RequestMapping(value = "/queryAll",name = "用mybatis原有的底层执行sql",method ={ RequestMethod.GET,RequestMethod.POST})
+    public List<User> queryAll(){
+        try {
+            return userService.queryAll();
+        } catch (Exception e) {
+            log.error(e.getMessage(),e);
+            return new ArrayList<>();
+        }
+    }
+
 
 }

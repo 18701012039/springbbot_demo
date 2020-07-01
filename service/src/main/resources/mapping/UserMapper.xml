@@ -71,4 +71,19 @@
       password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <sql id="sqlId">
+     user.id id,
+     user.userName userName,
+     user.password password
+  </sql>
+
+
+  <select id="queryUserList" resultType="com.zxb.domain.User">
+    SELECT
+        <include refid="sqlId"/>
+    FROM
+    user
+
+  </select>
 </mapper>

@@ -23,4 +23,6 @@ public interface IUserService {
      * @return 查询一条数据
      */
     User queryUserById(Long id);
+
+    List<User> queryAll() throws Exception;
 }

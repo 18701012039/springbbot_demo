@@ -1,6 +1,7 @@
 package com.zxb.service.mapper;
 
 import com.zxb.domain.User;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -18,4 +19,9 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> queryByUserList();
+
+    List<User> queryUserList();
+
+    @Select("SELECT * FROM user")
+    List<User> queryAll();
 }

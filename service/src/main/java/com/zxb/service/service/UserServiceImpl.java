@@ -2,6 +2,7 @@ package com.zxb.service.service;
 
 import com.zxb.api.IUserService;
 import com.zxb.domain.User;
+import com.zxb.service.mapper.SqlSessionFactoryDemo;
 import com.zxb.service.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -17,6 +18,9 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
 
     @Resource
+    private SqlSessionFactoryDemo sqlSessionFactoryDemo;
+
+    @Resource
     private UserMapper userMapper;
 
     @Override
@@ -27,5 +31,12 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User queryUserById(Long id) {
         return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<User> queryAll() throws Exception {
+        String name = UserMapper.class.getName();
+        UserMapper mapperClass = (UserMapper)sqlSessionFactoryDemo.getMapperClass(name);
+        return mapperClass.queryAll();
     }
 }
