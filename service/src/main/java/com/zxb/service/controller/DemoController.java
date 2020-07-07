@@ -3,6 +3,7 @@ package com.zxb.service.controller;
 import com.zxb.category.BusinessException;
 import com.zxb.service.aop.IgnoreResponseAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * @since 1.0
  */
 @RestController
+@RequestMapping("/demo")
 public class DemoController {
 
     /**

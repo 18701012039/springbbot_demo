@@ -25,4 +25,6 @@ public interface IUserService {
     User queryUserById(Long id);
 
     List<User> queryAll() throws Exception;
+
+    boolean addUser();
 }

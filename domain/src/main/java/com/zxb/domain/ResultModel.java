@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -11,6 +13,7 @@ import java.io.Serializable;
  * @author purgeyao
  * @since 1.0
  */
+@Data
 public class ResultModel<T> implements Serializable {
 
     @ApiModelProperty(value = "是否成功")
@@ -28,45 +31,6 @@ public class ResultModel<T> implements Serializable {
     @ApiModelProperty(value = "错误描述")
     private String msg;
 
-    public Boolean getSucc() {
-        return succ;
-    }
-
-    public void setSucc(Boolean succ) {
-        this.succ = succ;
-    }
-
-    public Long getTs() {
-        return ts;
-    }
-
-    public void setTs(Long ts) {
-        this.ts = ts;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public ResultModel() {
     }

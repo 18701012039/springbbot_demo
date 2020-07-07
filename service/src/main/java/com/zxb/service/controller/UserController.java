@@ -43,6 +43,8 @@ public class UserController {
             return new ArrayList<>();
         }
     }
-
-
+    @RequestMapping(value = "/addUser",name = "新增一条数据",method ={ RequestMethod.GET,RequestMethod.POST})
+    public boolean addUser(){
+        return userService.addUser();
+    }
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @IgnoreResponseAdvice(errorDispose = false)
-@RequestMapping("ignor")
+@RequestMapping("/ignor")
 public class IgnoreResponseAdviceController {
     /**
      * 全局异常处理

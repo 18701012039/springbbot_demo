@@ -21,7 +21,4 @@ public interface UserMapper {
     List<User> queryByUserList();
 
     List<User> queryUserList();
-
-    @Select("SELECT * FROM user")
-    List<User> queryAll();
 }
