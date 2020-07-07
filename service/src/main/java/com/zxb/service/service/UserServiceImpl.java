@@ -2,11 +2,13 @@ package com.zxb.service.service;
 
 import com.zxb.api.IUserService;
 import com.zxb.domain.User;
+import com.zxb.init.SyncExecutor;
 import com.zxb.service.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +22,9 @@ public class UserServiceImpl implements IUserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private SyncExecutor syncExecutor;
 
     @Override
     public List<User> queryUserList() {
@@ -54,4 +59,32 @@ public class UserServiceImpl implements IUserService {
     public List<User> queryAll() throws Exception {
         return userMapper.queryByUserList();
     }
+    @Override
+    public String syncExecutor(){
+        List<Integer> syncNum=new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            syncNum.add(i);
+        }
+        sync(syncNum);
+        return "处理成功";
+    }
+    //用线程池来处理处理  比如你有1000万条数据那就需要把数据拆成很多段每一段用一个线程进行处理
+    public void sync(List<Integer> syncNum){
+        syncExecutor.getExecutorService().submit(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("执行的线程是"+Thread.currentThread().getId());
+                systemNum(syncNum);
+            }
+        });
+    }
+    //需要被执行的任务
+    public void systemNum(List<Integer> numList){
+        for (Integer integer : numList) {
+
+        }
+        System.out.println(Thread.currentThread().getId());
+    }
+
+    
 }

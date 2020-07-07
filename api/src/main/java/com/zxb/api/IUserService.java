@@ -27,4 +27,8 @@ public interface IUserService {
     List<User> queryAll() throws Exception;
 
     boolean addUser();
+
+    String syncExecutor();
+
+
 }

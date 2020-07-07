@@ -47,4 +47,9 @@ public class UserController {
     public boolean addUser(){
         return userService.addUser();
     }
+
+    @RequestMapping(value = "/syncExecutor",name = "用多线程来处理数据",method ={ RequestMethod.GET,RequestMethod.POST})
+    public String syncExecutor(){
+        return userService.syncExecutor();
+    }
 }
