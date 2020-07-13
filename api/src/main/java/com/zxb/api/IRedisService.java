@@ -39,4 +39,6 @@ public interface IRedisService {
 
     boolean mapBasicMethod();
 
+    boolean setBasicMethod();
+
 }

@@ -1,15 +1,13 @@
 package com.zxb.service.service;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.zxb.api.IRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -203,7 +201,7 @@ public class RedisServiceImpl implements IRedisService {
         stringStringListOperations.leftPushAll("list",ImmutableList.of("abc","def"));
         log.info("添加一个集合的集合数据{}",stringStringListOperations.range("list",0,-1));
         //删除一个元素 删除第一次出现的元素 1是从哪个下标开始
-        Long remove = stringStringListOperations.remove("list", 1, "zqq");
+        stringStringListOperations.remove("list", 1, "zqq");
         log.info("删除之后的数据{}",stringStringListOperations.range("list",0,-1));
         //根据下标获取值
         log.info("获取下标2的元素{}",stringStringListOperations.index("list",2));
@@ -215,6 +213,48 @@ public class RedisServiceImpl implements IRedisService {
 
 
     /**
+     * set的一些基本操作
+     * @return
+     */
+    @Override
+    public boolean setBasicMethod() {
+        SetOperations<String, String> stringStringSetOperations = redisTemplate.opsForSet();
+        //应用常用比如抽奖小程序的应用场景
+        //第一步把所有的人录入
+        Set<String> set= ImmutableSet.of("a","b","c","d");
+        stringStringSetOperations.add("setTest","a","b","c","c");
+        //将中奖的人移到中奖的set中
+        stringStringSetOperations.move("setTest","a","setTest2");
+        //输出中奖人数
+        log.info("获取中奖人数{}",stringStringSetOperations.size("setTest2"));
+        log.info("展示所有人名{}",stringStringSetOperations.members("setTest2"));
+        //输出未中奖人数
+        log.info("获取未中奖人数{}",stringStringSetOperations.size("setTest"));
+        log.info("展示人名{}",stringStringSetOperations.members("setTest2"));
+        Cursor<String> setTest = stringStringSetOperations.scan("setTest", ScanOptions.NONE);
+        while(setTest.hasNext()){
+            String next = setTest.next();
+            log.info("{}未中奖",next);
+        }
+        Cursor<String> setTest2 = stringStringSetOperations.scan("setTest2", ScanOptions.NONE);
+        while (setTest2.hasNext()){
+            String next = setTest2.next();
+            log.info("{}中奖",next);
+        }
+        //比如问a是否中奖
+        boolean member = stringStringSetOperations.isMember("setTest", "a");
+        if (member){
+            //存在说明未中奖
+            log.info("a{}","未中奖");
+        }
+        //两个参数的交集
+        Set<String> intersect = stringStringSetOperations.intersect("setTest", "setTest1");
+
+        return false;
+    }
+
+    /**
+     * 应用场景可以用在淘宝购物车
      * hash的一些操作方法
      * @return
      */
