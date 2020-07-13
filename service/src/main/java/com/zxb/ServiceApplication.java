@@ -14,7 +14,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 //扫描注解
 @ComponentScan(basePackageClasses = {ServiceApplication.class})
 //扫描mapper
-@MapperScan(value = {"com.zxb.service.mapper"})
+@MapperScan(basePackages = "com.zxb.service.mapper")
 @EnableGlobalDispose
 public class ServiceApplication implements CommandLineRunner, WebMvcConfigurer {
 
