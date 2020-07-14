@@ -1,5 +1,7 @@
 package com.zxb;
 
+import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import com.alicp.jetcache.anno.config.EnableMethodCache;
 import com.zxb.service.aop.EnableGlobalDispose;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import tk.mybatis.spring.annotation.MapperScan;
 
+
 @SpringBootApplication
 @Slf4j
 //扫描注解
@@ -16,6 +19,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 //扫描mapper
 @MapperScan(basePackages = "com.zxb.service.mapper")
 @EnableGlobalDispose
+//开始缓存注解
+@EnableMethodCache(basePackages="com.zxb.service.service")
+@EnableCreateCacheAnnotation
 public class ServiceApplication implements CommandLineRunner, WebMvcConfigurer {
 
 	public static void main(String[] args) {

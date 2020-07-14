@@ -30,5 +30,9 @@ public interface IUserService {
 
     String syncExecutor();
 
+    List<User> redisCache(String name);
+
+    void deleteCache(String name,Long id);
+
 
 }

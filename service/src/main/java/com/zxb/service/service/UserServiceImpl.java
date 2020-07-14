@@ -1,9 +1,14 @@
 package com.zxb.service.service;
 
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheInvalidate;
+import com.alicp.jetcache.anno.Cached;
+import com.alicp.jetcache.anno.CreateCache;
 import com.zxb.api.IUserService;
 import com.zxb.domain.User;
 import com.zxb.init.SyncExecutor;
 import com.zxb.service.mapper.UserMapper;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +47,7 @@ public class UserServiceImpl implements IUserService {
     public boolean addUser() {
         User user=new User();
         user.setId(16L);
-        user.setUsername("zxn");
+        user.setUserName("zxn");
         user.setPassword("123456");
         userMapper.insert(user);
         //抛出异常是否回滚
@@ -60,13 +65,26 @@ public class UserServiceImpl implements IUserService {
     public List<User> queryAll() throws Exception {
         return userMapper.queryByUserList();
     }
+
+    @Override
+    @Cached(name = "UserServiceImpl:redisCache.",key="#name",expire = 3600)
+    public List<User> redisCache(String name) {
+        return userMapper.queryByUserName(name);
+    }
+
+    @CacheInvalidate(name = "UserServiceImpl:redisCache.",key="#name")
+    @Override
+    public void deleteCache(String name,Long id){
+        userMapper.deleteById(id);
+    }
+
     @Override
     public String syncExecutor(){
         List<User> syncNum=new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
             User user=new User();
             user.setPassword("12345"+i);
-            user.setUsername("zxb"+i);
+            user.setUserName("zxb"+i);
             syncNum.add(user);
         }
         sync(syncNum);

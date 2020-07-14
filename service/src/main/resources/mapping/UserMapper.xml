@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zxb.service.mapper.UserMapper">
-  <select id="queryByUserList" resultType="com.zxb.domain.User">
+    <delete id="deleteById">
+        delete from user where id=#{id}
+    </delete>
+    <select id="queryByUserList" resultType="com.zxb.domain.User">
     select * from user
   </select>
   <sql id="sqlId">
      user.id id,
-     user.userName userName,
+     user.user_name userName,
      user.password password
   </sql>
 
@@ -17,4 +20,7 @@
     user
 
   </select>
+    <select id="queryByUserName" resultType="com.zxb.domain.User">
+        select <include refid="sqlId"/> from user where user_name like concat("%",#{userName},"%")
+    </select>
 </mapper>
