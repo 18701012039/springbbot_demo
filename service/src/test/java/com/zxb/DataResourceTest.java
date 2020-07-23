@@ -1,7 +1,6 @@
 package com.zxb;
 
 import com.zxb.api.IDataResourceService;
-import com.zxb.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class DataResourceTest {
     private IDataResourceService dataResourceService;
 
     @Test
-    public void dataResourceZxbOneTest(){
+    public void dataResourceZxbOneTest() {
         dataResourceService.saveUserOne();
     }
 
