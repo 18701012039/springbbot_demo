@@ -1,7 +1,6 @@
 package com.zxb.utils;
 
 import lombok.extern.slf4j.Slf4j;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -25,11 +24,10 @@ public final class LogUtils{
      * @throws NoSuchMethodException
      * @throws InvocationTargetException
      * @throws IllegalAccessException
-     * @throws InstantiationException
      */
-    public static Object addLog(Object className,String methodName,Object... filedArr) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+    public static Object addLog(Object className,String methodName,Object... filedArr) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         long startTime=System.currentTimeMillis();
-        Object invoke=null;
+        Object invoke;
         Class<?> aClass = className.getClass();
         if (filedArr.length==0){
             Method declaredMethod = aClass.getDeclaredMethod(methodName);
@@ -42,7 +40,7 @@ public final class LogUtils{
             }
             Method declaredMethod = aClass.getDeclaredMethod(methodName, parameterArr);
             declaredMethod.setAccessible(true);
-            invoke=declaredMethod.invoke(className, parameterArr);
+            invoke=declaredMethod.invoke(className, (Object) parameterArr);
         }
         log.info("执行的方法名"+methodName);
         log.info("执行的方法"+aClass.getName()+"."+methodName);

@@ -45,6 +45,7 @@ public class DynamicDataSourceAspect {
             //切换数据源
             dbChangeService.changeDb(ds.value());
             log.info("set datasource is " + ds.value());
+            log.info("1233");
             //切换数据源
         }
         return point.proceed();
