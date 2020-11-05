@@ -1,6 +1,5 @@
 package com.zxb.anno;
 
-import com.zxb.domain.DataSourceNames;
 
 import java.lang.annotation.*;
 
