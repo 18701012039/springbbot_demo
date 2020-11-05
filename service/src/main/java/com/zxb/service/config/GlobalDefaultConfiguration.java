@@ -1,7 +1,6 @@
 package com.zxb.service.config;
 
 import com.zxb.domain.GlobalDefaultProperties;
-import com.zxb.service.aop.CommonResponseDataAdvice;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

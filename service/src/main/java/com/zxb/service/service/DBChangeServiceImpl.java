@@ -30,6 +30,7 @@ public class DBChangeServiceImpl implements DBChangeService {
     public boolean changeDb(String datasourceId) throws Exception {
         //默认切换到主数据源,进行整体资源的查找
         DataSourceContextHolder.clearDataSource();
+        //查询数据库的所有数据源
         List<DataSource> dataSourcesList = dataSourceMapper.get();
         for (DataSource dataSource : dataSourcesList) {
             if (dataSource.getCode().equals(datasourceId)) {

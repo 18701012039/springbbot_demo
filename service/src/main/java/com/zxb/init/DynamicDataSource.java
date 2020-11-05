@@ -50,11 +50,21 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         }
         return datasource;
     }
+
+    /**
+     * 设置目标数据源
+     * @param targetDataSources
+     */
     @Override
     public void setTargetDataSources(Map<Object, Object> targetDataSources) {
         super.setTargetDataSources(targetDataSources);
         this.dynamicTargetDataSources = targetDataSources;
     }
+
+    /**
+     * 设置默认数据源
+     * @param defaultTargetDataSource
+     */
     @Override
     public void setDefaultTargetDataSource(Object defaultTargetDataSource) {
         super.setDefaultTargetDataSource(defaultTargetDataSource);

@@ -1,17 +1,11 @@
-package com.zxb.domain;/**
- * @author zxb
- * @date 2018/10/19
- */
+package com.zxb.domain;
 
 import lombok.Data;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Update;
-
 import javax.validation.constraints.NotBlank;
 
 /**
- * 〈一句话功能简述〉<br> 
- * 〈〉
  *
  * @author admin
  * @create 2020/9/27

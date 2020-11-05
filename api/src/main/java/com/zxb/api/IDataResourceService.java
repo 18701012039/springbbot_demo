@@ -1,6 +1,5 @@
 package com.zxb.api;
 
-import com.zxb.domain.User;
 
 /**
  *

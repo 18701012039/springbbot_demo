@@ -39,7 +39,7 @@ public class LogAop {
      * @param proceedingJoinPoint
      * @return
      */
-    //@Around("pointcut()")
+//    @Around("pointcut()")
     public Object doLog(ProceedingJoinPoint proceedingJoinPoint){
         Signature signature = proceedingJoinPoint.getSignature();
         //方法名
